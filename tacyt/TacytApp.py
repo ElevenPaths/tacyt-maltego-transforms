@@ -36,7 +36,7 @@ class TacytApp(Auth):
         @param $app_id
         @param $secret_key
         '''
-        super(TacytApp, self).__init__(app_id, secret_key)
+        super(TacytApp, self).__init__(app_id, secret_key, Version.API_HOST)
 
 
     def search_apps(self, query, numberPage=None, maxResults=None, outfields = None, grouped=None):

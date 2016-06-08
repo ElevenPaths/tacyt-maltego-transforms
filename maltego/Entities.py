@@ -5,3 +5,6 @@ class TacytEntities:
     FIELD_NAME = 'maltego.Phrase'
     MAIL = 'maltego.EmailAddress'
     URL = 'maltego.URL'
+    DOMAIN = 'maltego.Domain'
+    EMAIL = 'maltego.EmailAddress'
+

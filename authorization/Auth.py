@@ -5,7 +5,6 @@ import time
 import json
 import hashlib
 from authorization.Response import Response
-from tacyt.Version import Version
 import Error
 
 class Auth(object):
@@ -40,7 +39,7 @@ class Auth(object):
     MULTIPART_FORM_DATA = "multipart/form-data"
     THREAD_POOL_SIZE = 10
 
-    def __init__(self, appId, secretKey):
+    def __init__(self, appId, secretKey, api_host):
         '''
         Create an instance of the class with the Application ID and secret obtained from Tacyt
         @param $appId
@@ -48,20 +47,20 @@ class Auth(object):
         '''
         self.appId = appId
         self.secretKey = secretKey
+        self.api_host = api_host
 
-    @staticmethod
-    def set_host(host):
+
+    def set_host(self, host):
         '''
         @param $host The host to be connected with (http://hostname) or (https://hostname)
         '''
         if host.startswith("http://"):
-
-            Version.API_HOST = host[len("http://"):]
+            self.api_host = host[len("http://"):]
             Auth.API_PORT = 80
             Auth.API_HTTPS = False
 
         elif host.startswith("https://"):
-            Version.API_HOST = host[len("https://"):]
+            self.api_host = host[len("https://"):]
             Auth.API_PORT = 443
             Auth.API_HTTPS = True
 
@@ -124,7 +123,7 @@ class Auth(object):
 
 
     def get_api_host(self):
-        return Version.API_HOST
+        return self.api_host
 
 
     def http_get_proxy(self, url, query_params = None):
@@ -218,15 +217,15 @@ class Auth(object):
         if Auth.API_PROXY != None:
             if Auth.API_HTTPS:
                 conn = http.HTTPSConnection(Auth.API_PROXY, Auth.API_PROXY_PORT)
-                conn.set_tunnel(Version.API_HOST, Auth.API_PORT)
+                conn.set_tunnel(self.api_host, Auth.API_PORT)
             else:
                 conn = http.HTTPConnection(Auth.API_PROXY, Auth.API_PROXY_PORT)
-                url = "http://" + Version.API_HOST + url
+                url = "http://" + self.api_host + url
         else:
             if Auth.API_HTTPS:
-                conn = http.HTTPSConnection(Version.API_HOST, Auth.API_PORT)
+                conn = http.HTTPSConnection(self.api_host, Auth.API_PORT)
             else:
-                conn = http.HTTPConnection(Version.API_HOST, Auth.API_PORT)
+                conn = http.HTTPConnection(self.api_host, Auth.API_PORT)
 
 
         if self.HTTP_METHOD_GET == method or self.HTTP_METHOD_DELETE == method:
