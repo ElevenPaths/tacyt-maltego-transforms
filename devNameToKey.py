@@ -27,15 +27,13 @@ try:
                 application = data['key']
                 m.addEntity(te.KEY, application.encode('utf-8'))
             else:
-                m.addException("The key is not found in the results")
-                m.throwExceptions()
-        m.returnOutput()
+                m.addUIMessage("The key is not found in the results")
 
     else:
-        m.addException("The search returns null results")
-        m.throwExceptions()
+        m.addUIMessage("The search returns null results")
 
 except Exception as e:
     m.addException(str(e))
     m.throwExceptions()
 
+m.returnOutput()

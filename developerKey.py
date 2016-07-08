@@ -25,23 +25,26 @@ try:
         details = data['result']
 
         if 'developerName' in details:
-            m.addEntity(te.FIELD, str(details['developerName']), te.FIELD_NAME, 'developerName')
+            if len(details['developerName']) > 0:
+                m.addEntity(te.ALIAS, str(details['developerName'].encode('utf-8')), te.FIELD_NAME, 'developerName')
 
         if 'developerPrivacy' in details:
-            m.addEntity(te.FIELD, str(details['developerPrivacy']), te.FIELD_NAME, 'developerPrivacy')
+            if len(details['developerPrivacy']) > 0:
+                m.addEntity(te.DOMAIN, str(details['developerPrivacy'].encode('utf-8')), te.FIELD_NAME, 'developerPrivacy')
 
         if 'developerWeb' in details:
-            m.addEntity(te.DOMAIN, str(details['developerWeb']), te.FIELD_NAME, 'developerWeb')
+            if len(details['developerWeb']) > 0:
+                m.addEntity(te.DOMAIN, str(details['developerWeb'].encode('utf-8')), te.FIELD_NAME, 'developerWeb')
 
         if 'developerEmail' in details:
-            m.addEntity(te.EMAIL, str(details['developerEmail']), te.FIELD_NAME, 'developerEmail')
-
-        m.returnOutput()
+            if len(details['developerEmail']) > 0:
+                m.addEntity(te.EMAIL, str(details['developerEmail'].encode('utf-8')), te.FIELD_NAME, 'developerEmail')
 
     else:
-        m.addException("The search returns null results")
-        m.throwExceptions()
+       m.addUIMessage("The search returns null results")
 
 except Exception as e:
     m.addException(str(e))
     m.throwExceptions()
+
+m.returnOutput()

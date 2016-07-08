@@ -28,17 +28,16 @@ try:
         details = data['result']
 
         if 'recentChanges' in details:
-            m.addEntity(te.FIELD, str(details['recentChanges']).encode('utf-8'), te.FIELD_NAME, 'recentChanges')
+            m.addEntity(te.FIELD, str(details['recentChanges'].encode('utf-8')), te.FIELD_NAME, 'recentChanges')
 
         if 'description' in details:
-            m.addEntity(te.FIELD, str(details['description']).encode('utf-8'), te.FIELD_NAME, 'description')
-
-        m.returnOutput()
+            m.addEntity(te.FIELD, str(details['description'].encode('utf-8')), te.FIELD_NAME, 'description')
 
     else:
-        m.addException("The search returns null results")
-        m.throwExceptions()
+        m.addUIMessage("The search returns null results")
 
 except Exception as e:
     m.addException(str(e))
     m.throwExceptions()
+
+m.returnOutput()

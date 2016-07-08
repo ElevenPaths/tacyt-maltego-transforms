@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Search apps by certificate Locality
+Search apps by emails
 
-:param field: locality to find
+:param field: emails to find
 :return: keys from the apps founds.
 """
 from tacyt import TacytApp
@@ -17,7 +17,7 @@ m = MaltegoTransform()
 field = sys.argv[1]
 
 try:
-    query = "certificateSubjectLocality:%s"%field
+    query = 'anyLinks:"%s"'%field
     result = api.search_apps(query=query,maxResults=100)
     data = result.get_data()
 
@@ -27,7 +27,7 @@ try:
                 application = data['key']
                 m.addEntity(te.KEY, application.encode('utf-8'))
             else:
-                m.addUIMessage("The key is not found in the results")
+                m.addUIMessage("The key is not found in the results.")
 
     else:
         m.addUIMessage("The search returns null results")
@@ -35,6 +35,5 @@ try:
 except Exception as e:
     m.addException(str(e))
     m.throwExceptions()
-
 
 m.returnOutput()

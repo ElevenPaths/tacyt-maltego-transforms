@@ -23,97 +23,65 @@ try:
 
     if 'result' in data and data['result'] is not None:
         details = data['result']
-        if 'certificateFingerprint' in details:
-            certificateFingerprint = details['certificateFingerprint']
-            m.addEntity('maltego.Phrase', certificateFingerprint, te.FIELD_NAME, 'certificateFingerprint')
-
-        if 'certificatePublicKey' in details:
-            certificatePublicKey = details['certificatePublicKey']
-            m.addEntity('maltego.Phrase', certificatePublicKey, te.FIELD_NAME, 'certificatePublicKey')
-
-        if 'certificateSignatureAlgorithm' in details:
-            certificateSignatureAlgorithm = details['certificateSignatureAlgorithm']
-            m.addEntity('maltego.Phrase', certificateSignatureAlgorithm,te.FIELD_NAME, 'certificateSignatureAlgorithm')
-
         if 'certificateValidFrom' in details:
-            certificateValidFrom = details['certificateValidFrom']
-            m.addEntity('maltego.Phrase', certificateValidFrom, te.FIELD_NAME, 'certificateValidFrom')
+            if len(details['certificateValidFrom']) > 0:
+                certificateValidFrom = details['certificateValidFrom']
+                m.addEntity('maltego.Phrase', certificateValidFrom, te.FIELD_NAME, 'certificateValidFrom')
+
 
         if 'certificateValidTo' in details:
-            certificateValidTo = details['certificateValidTo']
-            m.addEntity('maltego.Phrase', certificateValidTo, te.FIELD_NAME, 'certificateValidTo')
+            if len(details['certificateValidTo']) > 0:
+                certificateValidTo = details['certificateValidTo']
+                m.addEntity('maltego.Phrase', certificateValidTo, te.FIELD_NAME, 'certificateValidTo')
 
-        if 'certificateIssuerCommonName' in details:
-            certificateIssuerCommonName = details['certificateIssuerCommonName']
-            m.addEntity('maltego.Phrase', certificateIssuerCommonName, te.FIELD_NAME, 'certificateIssuerCommonName')
-
-        if 'certificateValidityGapRoundedYears' in details:
-            certificateValidityGapRoundedYears = details['certificateValidityGapRoundedYears']
-            m.addEntity('maltego.Phrase', str(certificateValidityGapRoundedYears), te.FIELD_NAME, 'certificateValidityGapRoundedYears')
-
-        if 'certificateValidityGapSeconds' in details:
-            certificateValidityGapSeconds = details['certificateValidityGapSeconds']
-            m.addEntity('maltego.Phrase', str(certificateValidityGapSeconds), te.FIELD_NAME, 'certificateValidityGapSeconds')
-
-        if 'certificateAutoSigned' in details:
-            certificateAutoSigned = details['certificateAutoSigned']
-            m.addEntity('maltego.Phrase', certificateAutoSigned, te.FIELD_NAME, 'certificateAutoSigned')
-
-        if 'certificatePublicKeyInfo' in details:
-            certificatePublicKeyInfo = details['certificatePublicKeyInfo']
-            m.addEntity('maltego.Phrase', certificatePublicKeyInfo, te.FIELD_NAME, 'certificatePublicKeyInfo')
-
-        if 'certificateVersion' in details:
-            certificateVersion = details['certificateVersion']
-            m.addEntity('maltego.Phrase', str(certificateVersion), te.FIELD_NAME, 'certificateVersion')
-
-        if 'certificateSerialNumber' in details:
-            certificateSerialNumber = details['certificateSerialNumber']
-            m.addEntity('maltego.Phrase', certificateSerialNumber, te.FIELD_NAME, 'certificateSerialNumber')
+        if 'certificateFingerprint' in details:
+            if len(details['certificateFingerprint']) > 0:
+                certificateFingerprint = details['certificateFingerprint']
+                m.addEntity('maltego.Phrase', certificateFingerprint, te.FIELD_NAME, 'certificateFingerprint')
 
         if 'certificateSubjectCommonName' in details:
-            m.addEntity(te.FIELD, details['certificateSubjectCommonName'], te.FIELD_NAME, 'certificateSubjectCommonName')
-
-        if 'certificateIssuerCountryName' in details:
-            m.addEntity(te.FIELD, details['certificateIssuerCountryName'], te.FIELD_NAME, 'certificateIssuerCountryName')
-
-        if 'certificateSubjectOrganizationUnitName' in details:
-            m.addEntity(te.FIELD, details['certificateSubjectOrganizationUnitName'], te.FIELD_NAME, 'certificateSubjectOrganizationUnitName')
-
-        if 'certificateIssuerOrganizationUnitName' in details:
-            m.addEntity(te.FIELD, details['certificateIssuerOrganizationUnitName'], te.FIELD_NAME, 'certificateIssuerOrganizationUnitName')
-
-        if 'certificateSubjectState' in details:
-            m.addEntity(te.FIELD, details['certificateSubjectState'], te.FIELD_NAME, 'certificateSubjectState')
+            if len(details['certificateSubjectCommonName']) > 0:
+                m.addEntity(te.ALIAS, details['certificateSubjectCommonName'], te.FIELD_NAME, 'certificateSubjectCommonName')
 
         if 'certificateSubjectCountryName' in details:
-            m.addEntity(te.FIELD, details['certificateSubjectCountryName'], te.FIELD_NAME, 'certificateSubjectCountryName')
-
-        if 'certificateIssuerState' in details:
-            m.addEntity(te.FIELD, details['certificateIssuerState'], te.FIELD_NAME, 'certificateIssuerState')
+            if len(details['certificateSubjectCountryName']) > 0:
+                m.addEntity(te.FIELD, details['certificateSubjectCountryName'], te.FIELD_NAME, 'certificateSubjectCountryName')
 
         if 'certificateSubjectLocality' in details:
-            m.addEntity(te.FIELD, details['certificateSubjectLocality'], te.FIELD_NAME, 'certificateSubjectLocality')
-
-        if 'certificateIssuerOrganizationName' in details:
-            m.addEntity(te.FIELD, details['certificateIssuerOrganizationName'], te.FIELD_NAME, 'certificateIssuerOrganizationName')
+            if len(details['certificateSubjectLocality']) > 0:
+                m.addEntity(te.FIELD, details['certificateSubjectLocality'], te.FIELD_NAME, 'certificateSubjectLocality')
 
         if 'certificateSubjectOrganizationName' in details:
-            m.addEntity(te.FIELD, details['certificateSubjectOrganizationName'], te.FIELD_NAME, 'certificateSubjectOrganizationName')
+            if len(details['certificateSubjectOrganizationName']) > 0:
+                m.addEntity(te.ALIAS, details['certificateSubjectOrganizationName'], te.FIELD_NAME, 'certificateSubjectOrganizationName')
+
+        if 'certificateSubjectOrganizationUnitName' in details:
+            if len(details['certificateSubjectOrganizationUnitName']) > 0:
+                m.addEntity(te.FIELD, details['certificateSubjectOrganizationUnitName'], te.FIELD_NAME, 'certificateSubjectOrganizationUnitName')
+
+        if 'certificatePublicKeyInfo' in details:
+            if len(details['certificatePublicKeyInfo']) > 0:
+                certificatePublicKeyInfo = details['certificatePublicKeyInfo']
+                m.addEntity('maltego.Phrase', certificatePublicKeyInfo, te.FIELD_NAME, 'certificatePublicKeyInfo')
+
+        if 'certificateSignatureAlgorithm' in details:
+            if len(details['certificateSignatureAlgorithm']) > 0:
+                certificateSignatureAlgorithm = details['certificateSignatureAlgorithm']
+                m.addEntity('maltego.Phrase', certificateSignatureAlgorithm,te.FIELD_NAME, 'certificateSignatureAlgorithm')
+
 
         if len(m.entities) > 0:
             m.returnOutput()
 
         else:
-            m.addException("The search returns null results")
-            m.throwExceptions()
+            m.addUIMessage("The search returns null results")
 
     else:
-        m.addException("The search returns null results")
-        m.throwExceptions()
+        m.addUIMessage("The search returns null results")
 
 except Exception as e:
     m.addException(str(e))
     m.throwExceptions()
 
 
+m.returnOutput()

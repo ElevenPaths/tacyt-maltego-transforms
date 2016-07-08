@@ -29,14 +29,14 @@ try:
             for i in l_links:
                 m.addEntity(te.DOMAIN,i, te.FIELD_NAME, 'permissionName')
 
-        m.returnOutput()
+
 
     else:
-        m.addException("The search returns null results")
-        m.throwExceptions()
+        m.addUIMessage("The search returns null results")
 
 except Exception as e:
     m.addException(str(e))
     m.throwExceptions()
 
 
+m.returnOutput()

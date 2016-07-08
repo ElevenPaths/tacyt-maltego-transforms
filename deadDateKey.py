@@ -25,16 +25,21 @@ try:
     data = result.get_data()
 
     if 'result' in data and data['result'] is not None:
-        createDate = data['result']['deadDate'].encode('utf-8')
+        details = data['result']
 
-        datetime = datetime.strptime(createDate, '%Y-%m-%dT%H:%M:%SZ')
-        m.addEntity(te.FIELD, datetime.strftime('%Y-%m-%d %H:%M:%S'), te.FIELD_NAME, 'deadDate')
-        m.returnOutput()
+        if 'deadDate' in details:
+            deadDate = details['deadDate'].encode('utf-8')
+            datetime = datetime.strptime(deadDate, '%Y-%m-%dT%H:%M:%SZ')
+            m.addEntity(te.FIELD, datetime.strftime('%Y-%m-%d %H:%M:%S'), te.FIELD_NAME, 'deadDate')
+
+        else:
+            m.addUIMessage("The app is not dead.")
 
     else:
-        m.addException("The search returns null results")
-        m.throwExceptions()
+        m.addUIMessage("The search returns null results")
 
 except Exception as e:
     m.addException(str(e))
     m.throwExceptions()
+
+m.returnOutput()

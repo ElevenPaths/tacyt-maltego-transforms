@@ -25,17 +25,18 @@ try:
     data = result.get_data()
 
     if 'result' in data and data['result'] is not None:
-        createDate = data['result']['createDate'].encode('utf-8')
+        if len(data['result']['createDate']) > 0:
+            createDate = data['result']['createDate'].encode('utf-8')
 
-        datetime = datetime.strptime(createDate, '%Y-%m-%dT%H:%M:%SZ')
-        m.addEntity(te.FIELD, datetime.strftime('%Y-%m-%d %H:%M:%S'), te.FIELD_NAME, 'createDate')
-        m.returnOutput()
+            datetime = datetime.strptime(createDate, '%Y-%m-%dT%H:%M:%SZ')
+            m.addEntity(te.FIELD, datetime.strftime('%Y-%m-%d %H:%M:%S'), te.FIELD_NAME, 'createDate')
 
     else:
-        m.addException("The search returns null results")
-        m.throwExceptions()
+        m.addUIMessage("The search returns null results")
+
 
 except Exception as e:
     m.addException(str(e))
     m.throwExceptions()
 
+m.returnOutput()

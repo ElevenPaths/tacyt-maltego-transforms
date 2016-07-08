@@ -45,14 +45,12 @@ try:
         if 'VTScanDate' in details:
             m.addEntity(te.FIELD, str(details['VTScanDate']), te.FIELD_NAME, 'VTScanDate')
 
-        m.returnOutput()
-
     else:
-        m.addException("The search returns null results")
-        m.throwExceptions()
+        m.addUIMessage("The search returns null results")
 
 except Exception as e:
     m.addException(str(e))
     m.throwExceptions()
 
 
+m.returnOutput()

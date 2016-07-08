@@ -31,16 +31,12 @@ try:
             for i in permissions:
                 m.addEntity(te.FIELD,i, te.FIELD_NAME, 'permissionName')
 
-        m.returnOutput()
-
     else:
-        m.addException("The search returns null results")
-        m.throwExceptions()
-
-
+        m.addUIMessage("The search returns null results")
 
 except Exception as e:
     m.addException(str(e))
     m.throwExceptions()
 
 
+m.returnOutput()

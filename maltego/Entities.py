@@ -7,4 +7,5 @@ class TacytEntities:
     URL = 'maltego.URL'
     DOMAIN = 'maltego.Domain'
     EMAIL = 'maltego.EmailAddress'
-
+    HASH = 'maltego.Hash'
+    ALIAS = 'maltego.Alias'
