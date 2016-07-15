@@ -24,12 +24,14 @@ try:
     if 'result' in data and data['result'] is not None:
         details = data['result']
         if 'nPermissions' in details:
-            m.addEntity(te.FIELD, str(details['nPermissions']), te.FIELD_NAME, 'nPermissions')
+            if len(details['nPermissions']) > 0:
+                m.addEntity(te.FIELD, str(details['nPermissions']), te.FIELD_NAME, 'nPermissions')
 
         if 'permissionName' in details:
-            permissions = details['permissionName']
-            for i in permissions:
-                m.addEntity(te.FIELD,i, te.FIELD_NAME, 'permissionName')
+            if len(details['permissionName']) > 0:
+                permissions = details['permissionName']
+                for i in permissions:
+                    m.addEntity(te.FIELD,i, te.FIELD_NAME, 'permissionName')
 
     else:
         m.addUIMessage("The search returns null results")

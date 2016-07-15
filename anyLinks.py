@@ -19,18 +19,18 @@ field = sys.argv[1]
 try:
     query = 'anyLinks:"%s"'%field
     result = api.search_apps(query=query,maxResults=100)
-    data = result.get_data()
+    if result is not None:
+        data = result.get_data()
+        if 'result' in data and data['result'] is not None and 'applications' in data['result'] and data['result']['applications']:
+            for data in data['result']['applications']:
+                if 'key' in data and data['key'] is not None:
+                    application = data['key']
+                    m.addEntity(te.KEY, application.encode('utf-8'))
+                else:
+                    m.addUIMessage("Key not found in results.")
 
-    if 'result' in data and data['result'] is not None and 'applications' in data['result'] and data['result']['applications']:
-        for data in data['result']['applications']:
-            if 'key' in data and data['key'] is not None:
-                application = data['key']
-                m.addEntity(te.KEY, application.encode('utf-8'))
-            else:
-                m.addUIMessage("The key is not found in the results.")
-
-    else:
-        m.addUIMessage("The search returns null results")
+        else:
+            m.addUIMessage("Null results are returned in search")
 
 except Exception as e:
     m.addException(str(e))

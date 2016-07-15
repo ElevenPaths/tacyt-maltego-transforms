@@ -26,7 +26,7 @@ try:
         for data in data['result']['applications']:
             if 'key' in data and data['key'] is not None:
                 application = data['key']
-                m.addEntity(te.KEY, application.encode('utf-8'))
+                m.addEntity(te.KEY, application.encode('utf-8', errors='ignore'))
             else:
                 m.addUIMessage("The key is not found in the results")
 
